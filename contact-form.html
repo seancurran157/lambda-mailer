@@ -1,0 +1,46 @@
+<script language="JavaScript" type="text/javascript"src="style/js/jquery.js"></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<div class="container">
+  <h2>Contact-test-form</h2>
+  <form id="contact-form">
+    <label for="name-input">Name:</label>
+    <input type="text" id="name-input" placeholder="name here..." />
+
+    <label for="email-input">Email:</label>
+    <input type="email" id="email-input" placeholder="email here..."/>
+
+    <label for="description-input">How can we help you?</label>
+    <textarea id="description-input" rows="3" placeholder="tell us..."></textarea>
+
+    <button type="submit">Submit</button>
+    <div class="g-recaptcha" data-sitekey="<<public key input>>"></div>
+  </form>
+
+  <script>
+  var URL = '<< API Gateway URL >>'
+
+  $('#contact-form').submit(function (event) {
+    event.preventDefault()
+
+    var data = {
+      name: $('#name-input').val(),
+      contact: $('#email-input').val(),
+      message: $('#description-input').val(),
+      recaptcha: 'success'
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: URL,
+      dataType: 'json',
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      success: function () {
+        // clear form and show a success message
+      },
+      error: function () {
+        // show an error message
+      }
+    })
+  })
+  </script>
